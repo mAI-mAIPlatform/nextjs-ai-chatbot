@@ -153,7 +153,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
       <SidebarGroup>
         <SidebarGroupContent>
           <div className="px-2 text-zinc-500 w-full flex flex-row justify-center items-center text-sm gap-2">
-            Connectez-vous pour enregistrer et revoir les discussions précédentes !
+            Connectez-vous pour enregistrer et revoir les discussions précédentes&nbsp;!
           </div>
         </SidebarGroupContent>
       </SidebarGroup>
@@ -164,7 +164,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
     return (
       <SidebarGroup>
         <div className="px-2 py-1 text-xs text-sidebar-foreground/50">
-          Aujourd'hui
+          Aujourd&apos;hui
         </div>
         <SidebarGroupContent>
           <div className="flex flex-col">
@@ -194,7 +194,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
       <SidebarGroup>
         <SidebarGroupContent>
           <div className="px-2 text-zinc-500 w-full flex flex-row justify-center items-center text-sm gap-2">
-            Vos conversations apparaîtront ici une fois que vous aurez commencé à discuter !
+            Vos conversations apparaîtront ici une fois que vous aurez commencé à discuter&nbsp;!
           </div>
         </SidebarGroupContent>
       </SidebarGroup>
@@ -299,7 +299,7 @@ export function SidebarHistory({ user }: { user: User | undefined }) {
                     {groupedChats.older.length > 0 && (
                       <div>
                         <div className="px-2 py-1 text-xs text-sidebar-foreground/50">
-                          Plus d'un mois
+                          Plus d&apos;un mois
                         </div>
                         {groupedChats.older.map((chat) => (
                           <ChatItem
