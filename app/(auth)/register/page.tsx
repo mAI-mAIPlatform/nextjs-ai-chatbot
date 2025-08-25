@@ -28,16 +28,16 @@ export default function Page() {
 
   useEffect(() => {
     if (state.status === 'user_exists') {
-      toast({ type: 'error', description: 'Account already exists!' });
+      toast({ type: 'error', description: 'Il y a un compte existant' });
     } else if (state.status === 'failed') {
-      toast({ type: 'error', description: 'Failed to create account!' });
+      toast({ type: 'error', description: 'Erreur' });
     } else if (state.status === 'invalid_data') {
       toast({
         type: 'error',
-        description: 'Failed validating your submission!',
+        description: 'Erreur',
       });
     } else if (state.status === 'success') {
-      toast({ type: 'success', description: 'Account created successfully!' });
+      toast({ type: 'success', description: 'Compte crée' });
 
       setIsSuccessful(true);
       updateSession();
@@ -56,18 +56,18 @@ export default function Page() {
         <div className="flex flex-col items-center justify-center gap-2 px-4 text-center sm:px-16">
           <h3 className="text-xl font-semibold dark:text-zinc-50">Sign Up</h3>
           <p className="text-sm text-gray-500 dark:text-zinc-400">
-            Create an account with your email and password
+            Créer un compte avec l'e-mail et mot de passe
           </p>
         </div>
         <AuthForm action={handleSubmit} defaultEmail={email}>
-          <SubmitButton isSuccessful={isSuccessful}>Sign Up</SubmitButton>
+          <SubmitButton isSuccessful={isSuccessful}>S'inscrire</SubmitButton>
           <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
             {'Already have an account? '}
             <Link
               href="/login"
               className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
             >
-              Sign in
+              S'inscrire
             </Link>
             {' instead.'}
           </p>
