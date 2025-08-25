@@ -28,13 +28,13 @@ const visibilities: Array<{
   {
     id: 'private',
     label: 'Privé',
-    description: 'Vous seul pouvez accéder à ce chat',
+    description: 'Vous seul pouvez accéder à cette discussion',
     icon: <LockIcon />,
   },
   {
     id: 'public',
     label: 'Publique',
-    description: 'Toute personne disposant du lien peut accéder à ce chat',
+    description: 'Toute personne disposant du lien peut accéder à cette discussion',
     icon: <GlobeIcon />,
   },
 ];
