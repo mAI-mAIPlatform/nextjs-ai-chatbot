@@ -48,10 +48,10 @@ function PureChatHeader({
               }}
             >
               <PlusIcon />
-              <span className="md:sr-only">New Chat</span>
+              <span className="md:sr-only">Nouveau</span>
             </Button>
           </TooltipTrigger>
-          <TooltipContent>New Chat</TooltipContent>
+          <TooltipContent>Nouveau</TooltipContent>
         </Tooltip>
       )}
 
@@ -80,7 +80,7 @@ function PureChatHeader({
           target="_noblank"
         >
           <VercelIcon size={16} />
-          Deploy with Vercel
+          Deployé avec mDevlopers et GitHub
         </Link>
       </Button>
     </header>
