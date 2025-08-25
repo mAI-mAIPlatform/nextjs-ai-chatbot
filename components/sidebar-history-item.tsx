@@ -77,7 +77,7 @@ const PureChatItem = ({
                 >
                   <div className="flex flex-row gap-2 items-center">
                     <LockIcon size={12} />
-                    <span>Private</span>
+                    <span>Privée</span>
                   </div>
                   {visibilityType === 'private' ? (
                     <CheckCircleFillIcon />
@@ -91,7 +91,7 @@ const PureChatItem = ({
                 >
                   <div className="flex flex-row gap-2 items-center">
                     <GlobeIcon />
-                    <span>Public</span>
+                    <span>Publique</span>
                   </div>
                   {visibilityType === 'public' ? <CheckCircleFillIcon /> : null}
                 </DropdownMenuItem>
