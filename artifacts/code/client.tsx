@@ -80,10 +80,10 @@ export const codeArtifact = new Artifact<'code', Metadata>({
       setArtifact((draftArtifact) => ({
         ...draftArtifact,
         content: streamPart.data,
+        // FIX: make visible when streaming and content is long enough
         isVisible:
           draftArtifact.status === 'streaming' &&
-          draftArtifact.content.length > 300 &&
-          draftArtifact.content.length < 310
+          draftArtifact.content.length > 300
             ? true
             : draftArtifact.isVisible,
         status: 'streaming',
@@ -113,7 +113,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
   },
   actions: [
     {
-      icon: <PlayIcon size={18} />,
+      icon: <PlayIcon size={18} />, 
       label: 'Run',
       description: 'Execute code',
       onClick: async ({ content, setMetadata }) => {
@@ -133,8 +133,8 @@ export const codeArtifact = new Artifact<'code', Metadata>({
         }));
 
         try {
-          // @ts-expect-error - loadPyodide is not defined
-          const currentPyodideInstance = await globalThis.loadPyodide({
+          // @ts-expect-error - loadPyodide is not defined in TS env
+          const currentPyodideInstance = await (globalThis as any).loadPyodide({
             indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/',
           });
 
@@ -146,22 +146,6 @@ export const codeArtifact = new Artifact<'code', Metadata>({
                   : 'text',
                 value: output,
               });
-            },
-          });
-
-          await currentPyodideInstance.loadPackagesFromImports(content, {
-            messageCallback: (message: string) => {
-              setMetadata((metadata) => ({
-                ...metadata,
-                outputs: [
-                  ...metadata.outputs.filter((output) => output.id !== runId),
-                  {
-                    id: runId,
-                    contents: [{ type: 'text', value: message }],
-                    status: 'loading_packages',
-                  },
-                ],
-              }));
             },
           });
 
@@ -200,7 +184,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
               ...metadata.outputs.filter((output) => output.id !== runId),
               {
                 id: runId,
-                contents: [{ type: 'text', value: error.message }],
+                contents: [{ type: 'text', value: error?.message ?? String(error) }],
                 status: 'failed',
               },
             ],
@@ -209,45 +193,38 @@ export const codeArtifact = new Artifact<'code', Metadata>({
       },
     },
     {
-      icon: <UndoIcon size={18} />,
+      icon: <UndoIcon size={18} />, 
       description: 'View Previous version',
       onClick: ({ handleVersionChange }) => {
         handleVersionChange('prev');
       },
-      isDisabled: ({ currentVersionIndex }) => {
-        if (currentVersionIndex === 0) {
-          return true;
-        }
-
-        return false;
-      },
+      isDisabled: ({ currentVersionIndex }) => currentVersionIndex === 0,
     },
     {
-      icon: <RedoIcon size={18} />,
+      icon: <RedoIcon size={18} />, 
       description: 'View Next version',
       onClick: ({ handleVersionChange }) => {
         handleVersionChange('next');
       },
-      isDisabled: ({ isCurrentVersion }) => {
-        if (isCurrentVersion) {
-          return true;
-        }
-
-        return false;
-      },
+      isDisabled: ({ isCurrentVersion }) => isCurrentVersion,
     },
     {
-      icon: <CopyIcon size={18} />,
+      icon: <CopyIcon size={18} />, 
       description: 'Copy code to clipboard',
-      onClick: ({ content }) => {
-        navigator.clipboard.writeText(content);
-        toast.success('Copied to clipboard!');
+      onClick: async ({ content }) => {
+        try {
+          await navigator.clipboard.writeText(content ?? '');
+          toast.success('Copied to clipboard!');
+        } catch (err) {
+          console.error('Clipboard copy failed', err);
+          toast.error('Copy failed — permission denied or unsupported');
+        }
       },
     },
   ],
   toolbar: [
     {
-      icon: <MessageIcon />,
+      icon: <MessageIcon />, 
       description: 'Add comments',
       onClick: ({ sendMessage }) => {
         sendMessage({
@@ -262,7 +239,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
       },
     },
     {
-      icon: <LogsIcon />,
+      icon: <LogsIcon />, 
       description: 'Add logs',
       onClick: ({ sendMessage }) => {
         sendMessage({
