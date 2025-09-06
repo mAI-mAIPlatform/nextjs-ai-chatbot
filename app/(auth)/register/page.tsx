@@ -65,7 +65,7 @@ export default function Page() {
           On retire également defaultEmail qui n'est plus nécessaire.
         */}
         <AuthForm action={formAction}>
-          <SubmitButton isSuccessful={isSuccessful}>S'inscrire</SubmitButton>
+          <SubmitButton isSuccessful={isSuccessful}>{"S'inscrire"}</SubmitButton>
           <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
             {'Vous avez déjà un compte ? '}
             <Link
