@@ -113,7 +113,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
   },
   actions: [
     {
-      icon: <PlayIcon size={18} />,
+      icon: <PlayIcon size={18} />, 
       label: 'Run',
       description: 'Execute code',
       onClick: async ({ content, setMetadata }) => {
@@ -133,8 +133,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
         }));
 
         try {
-          // @ts-expect-error - loadPyodide is not defined
-          const currentPyodideInstance = await globalThis.loadPyodide({
+          const currentPyodideInstance = await (globalThis as any).loadPyodide({
             indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.23.4/full/',
           });
 
@@ -209,7 +208,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
       },
     },
     {
-      icon: <UndoIcon size={18} />,
+      icon: <UndoIcon size={18} />, 
       description: 'View Previous version',
       onClick: ({ handleVersionChange }) => {
         handleVersionChange('prev');
@@ -223,7 +222,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
       },
     },
     {
-      icon: <RedoIcon size={18} />,
+      icon: <RedoIcon size={18} />, 
       description: 'View Next version',
       onClick: ({ handleVersionChange }) => {
         handleVersionChange('next');
@@ -237,7 +236,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
       },
     },
     {
-      icon: <CopyIcon size={18} />,
+      icon: <CopyIcon size={18} />, 
       description: 'Copy code to clipboard',
       onClick: ({ content }) => {
         navigator.clipboard.writeText(content);
@@ -247,7 +246,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
   ],
   toolbar: [
     {
-      icon: <MessageIcon />,
+      icon: <MessageIcon />, 
       description: 'Add comments',
       onClick: ({ sendMessage }) => {
         sendMessage({
@@ -262,7 +261,7 @@ export const codeArtifact = new Artifact<'code', Metadata>({
       },
     },
     {
-      icon: <LogsIcon />,
+      icon: <LogsIcon />, 
       description: 'Add logs',
       onClick: ({ sendMessage }) => {
         sendMessage({
