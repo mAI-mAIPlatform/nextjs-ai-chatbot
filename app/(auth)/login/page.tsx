@@ -61,7 +61,7 @@ export default function Page() {
         <AuthForm action={handleSubmit} defaultEmail={email}>
           <SubmitButton isSuccessful={isSuccessful}>Se connecter</SubmitButton>
           <p className="text-center text-sm text-gray-600 mt-4 dark:text-zinc-400">
-            Vous n&apos;avez pas de compte ?
+            Vous n&apos;avez pas de compte ? 
             <Link
               href="/register"
               className="font-semibold text-gray-800 hover:underline dark:text-zinc-200"
