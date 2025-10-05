@@ -6,13 +6,13 @@ import { getMessageByErrorCode } from '@/lib/errors';
 
 test.describe
   .serial('Guest Session', () => {
-    test('Authenticate as guest user when a new session is loaded', async ({
+    test('S'authentifier en tant qu'utilisateur invité lorsqu'une nouvelle session est chargée', async ({
       page,
     }) => {
       const response = await page.goto('/');
 
       if (!response) {
-        throw new Error('Failed to load page');
+        throw new Error('Erreur');
       }
 
       let request = response.request();
@@ -31,7 +31,7 @@ test.describe
       ]);
     });
 
-    test('Log out is not available for guest users', async ({ page }) => {
+    test('La déconnexion n'est pas disponible pour l'utilisateur invité', async ({ page }) => {
       await page.goto('/');
 
       const sidebarToggleButton = page.getByTestId('sidebar-toggle-button');
@@ -48,7 +48,7 @@ test.describe
       await expect(authMenuItem).toContainText('Login to your account');
     });
 
-    test('Do not authenticate as guest user when an existing non-guest session is active', async ({
+    test('Ne vous authentifiez pas en tant qu'utilisateur invité lorsqu'une session non invité existante est active', async ({
       adaContext,
     }) => {
       const response = await adaContext.page.goto('/');
@@ -93,7 +93,7 @@ test.describe
   });
 
 test.describe
-  .serial('Login and Registration', () => {
+  .serial('Connexion et inscription', () => {
     let authPage: AuthPage;
 
     const testUser = generateRandomTestUser();
@@ -116,7 +116,7 @@ test.describe
       await authPage.login(testUser.email, testUser.password);
 
       await page.waitForURL('/');
-      await expect(page.getByPlaceholder('Send a message...')).toBeVisible();
+      await expect(page.getByPlaceholder('Discutez...')).toBeVisible();
     });
 
     test('Display user email in user menu', async ({ page }) => {
